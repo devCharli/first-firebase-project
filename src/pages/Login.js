@@ -12,8 +12,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full max-w-xs" style={{ margin: "0 auto" }}>
-      <h1 className="text-center">Login</h1>
+    <div className="form">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

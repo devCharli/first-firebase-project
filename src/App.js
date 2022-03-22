@@ -1,38 +1,39 @@
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import MainPage from "./pages/MainPage";
+import HomeGuest from "./pages/HomeGuest";
 
 function App() {
   const { authIsReady, user } = useAuthContext();
-  console.log("app comp", user);
   return (
-    <div>
+    // <body className="bg-white dark:bg-black transition-all">
+    <>
       {authIsReady && (
         <BrowserRouter>
           <Navbar />
-          <Switch>
-            <Route exact path="/">
-              {user && <Home />}
-              {/* {!user && <Redirect to="/" />} */}
-              {!user && <MainPage />}
-            </Route>
-            <Route exact path="/signup">
-              {user && <Redirect to="/" />}
-              {!user && <Signup />}
-            </Route>
-            <Route exact path="/login">
-              {user && <Redirect to="/" />}
-              {!user && <Login />}
-            </Route>
-          </Switch>
+          <section className="flex justify-center">
+            <Switch>
+              <Route exact path="/">
+                {user && <Home />}
+                {/* {!user && <Redirect to="/" />} */}
+                {!user && <HomeGuest />}
+              </Route>
+              <Route exact path="/signup">
+                {user && <Redirect to="/" />}
+                {!user && <Signup />}
+              </Route>
+              <Route exact path="/login">
+                {user && <Redirect to="/" />}
+                {!user && <Login />}
+              </Route>
+            </Switch>
+          </section>
         </BrowserRouter>
       )}
-    </div>
+    </>
   );
 }
 

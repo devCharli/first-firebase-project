@@ -13,7 +13,7 @@ const Home = () => {
   );
 
   return (
-    <div className="p-11 flex flex-col items-center md:flex-row md:justify-center md:items-start">
+    <div className="p-11 flex flex-col relative items-center md:flex-row md:justify-center md:items-start">
       <TransactionForm uid={user.uid} />
       {error && <p>{error}</p>}
       {documents && <TransactionList transactions={documents} />}

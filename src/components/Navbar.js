@@ -1,45 +1,48 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
-import useLogout from "../hooks/useLogout";
+import Menu from "./Menu";
+import MobileMenu from "./MobileMenu";
+import ToggleBtn from "./Toggle";
 
 const Navbar = () => {
-  const { user } = useAuthContext();
-  const { logout } = useLogout();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="flex justify-between items-center p-2 pr-10">
-      <Link to="/" className="text-3xl font-bold p-4">
-        <h1>My Wallet</h1>
-      </Link>
-      <ul>
-        {!user && (
-          <>
-            <Link to="/login" className="p-2">
-              <button className="text-slate-600 border-solid rounded-full border-2 border-indigo-600 p-1 pr-2 pl-2 hover:bg-indigo-600 hover:text-white">
-                Login
-              </button>
-            </Link>
-            <Link to="/signup" className="p-2">
-              <button className="text-slate-600 border-solid rounded-full border-2 border-indigo-600 p-1 pr-2 pl-2 hover:bg-indigo-600 hover:text-white">
-                Signup
-              </button>
-            </Link>
-          </>
-        )}
-        {user && (
-          <div className="flex items-center">
-            <li className="pr-4 text-xl">Hello, {user.displayName}</li>
-            <li>
-              <button
-                className="border-solid rounded-full border-2 border-indigo-600 p-1 pr-2 pl-2 hover:bg-indigo-600 hover:text-white"
-                onClick={logout}
-              >
-                Logout
-              </button>
-            </li>
-          </div>
-        )}
-      </ul>
+    <nav className="p-2 pr-4 md:pr-10">
+      {/* title */}
+      <div className="flex justify-between items-center">
+        <Link to="/" className="text-3xl font-bold p-4">
+          <h1>My Wallet</h1>
+        </Link>
+        <div className="md:hidden flex items-center">
+          <ToggleBtn />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </div>
+        <div className="hidden md:flex md:items-center">
+          <ToggleBtn />
+          <Menu />
+        </div>
+      </div>
+      {/* mobile */}
+      <div className="flex justify-center">
+        {isOpen && <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />}
+      </div>
     </nav>
   );
 };
