@@ -1,6 +1,6 @@
 # My Wallet
 
-[Click to view My Wallet](https://mywallet-594e6.web.app/).
+[Click to view My Wallet](https://mywallet-594e6.firebaseapp.com/).
 
 - Money tracker app
 - Autentication with Firebase
